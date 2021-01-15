@@ -23,7 +23,7 @@ int creer_serveur(int port){
   if(bind(socket_serveur, (struct sockaddr *)&saddr, sizeof(saddr)) == -1){
     printf("%d", errno);
     perror("bind socket_serveur");
-    exit(1);
+    //exit(1);
   }
   /* Demarrer attente de connexion */
   if(listen(socket_serveur,10) == -1){
@@ -39,7 +39,11 @@ int creer_serveur(int port){
       exit(1);
     }
     const char *message_bienvenue = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse suscipit convallis nunc, in placerat dolor sodales id. Nulla imperdiet nunc in turpis pulvinar ullamcorper. Proin placerat aliquet mauris id mattis. Praesent iaculis enim dolor, sit amet pharetra ligula rhoncus suscipit. Integer ac urna vel metus mattis vehicula venenatis ut velit. Aenean vel ligula sagittis, mattis sapien nec, rutrum elit. Sed at pretium magna. Sed placerat enim eget purus vestibulum, vel pretium lorem volutpat. Duis tempus in nisl id imperdiet. Morbi ac consectetur felis. Duis gravida, erat et lobortis feugiat, sapien magna ornare nisi, id finibus sem nisl eget sapien.\n ";
+    while(1){
     write(socket_client, message_bienvenue, strlen(message_bienvenue));
-      
+    }
+    
+    close(socket_serveur);
+    close(socket_client);
     return 0;
 }
